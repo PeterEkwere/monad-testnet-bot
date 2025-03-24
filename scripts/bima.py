@@ -374,7 +374,7 @@ class Bima:
     async def _send_transaction(self, transaction: Dict) -> bytes:
         """Gửi giao dịch đã ký."""
         signed_txn = self.web3.eth.account.sign_transaction(transaction, self.private_key)
-        tx_hash = await self.web3.eth.send_raw_transaction(signed_txn.encoded_transaction)
+        tx_hash = await self.web3.eth.send_raw_transaction(signed_txn.raw_transaction)
         logger.info(f"[{self.account_index}] Waiting for transaction confirmation...")
         await self.web3.eth.wait_for_transaction_receipt(tx_hash)
         return tx_hash
