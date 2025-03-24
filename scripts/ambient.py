@@ -231,7 +231,7 @@ class AmbientDex:
                     **gas_params,
                 }
                 signed_txn = self.web3.eth.account.sign_transaction(transaction, self.account.key)
-                tx_hash = await self.web3.eth.send_raw_transaction(signed_txn.encoded_transaction)
+                tx_hash = await self.web3.eth.send_raw_transaction(signed_txn.raw_transaction)
                 print_step('swap', "Waiting for transaction confirmation...", self.language)
                 receipt = await self.web3.eth.wait_for_transaction_receipt(tx_hash, poll_latency=2)
                 if receipt['status'] == 1:
@@ -270,7 +270,7 @@ class AmbientDex:
                     **gas_params,
                 })
                 signed_txn = self.web3.eth.account.sign_transaction(approve_tx, self.account.key)
-                tx_hash = await self.web3.eth.send_raw_transaction(signed_txn.encoded_transaction)
+                tx_hash = await self.web3.eth.send_raw_transaction(signed_txn.raw_transaction)
                 print_step('approve', f"Approving {self.convert_from_wei(amount, token):.4f} {token.upper()}...", self.language)
                 receipt = await self.web3.eth.wait_for_transaction_receipt(tx_hash, poll_latency=2)
                 if receipt['status'] == 1:
