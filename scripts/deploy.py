@@ -116,7 +116,7 @@ async def deploy_contract(private_key, token_name, token_symbol):
 
         print_step('deploy', 'Sending transaction...')
         signed_tx = w3.eth.account.sign_transaction(tx, private_key)
-        tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        tx_hash = w3.eth.send_raw_transaction(signed_tx.encoded_transaction)
         
         print_step('deploy', f"Tx Hash: {Fore.YELLOW}{EXPLORER_URL}{tx_hash.hex()}{Style.RESET_ALL}")
         await asyncio.sleep(2)
